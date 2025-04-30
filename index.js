@@ -11,7 +11,7 @@ app.use(express.json());
 // In-memory storage for the latest data
 let latestData = null;
 
-// Webhook endpoint
+// Webhook endpoint - receives data and forwards it to Vercel
 app.post('/api/webhook', async (req, res) => {
   const data = req.body;
   latestData = data;
@@ -32,7 +32,7 @@ app.post('/api/webhook', async (req, res) => {
   }
 });
 
-// Endpoint to retrieve the latest data
+// Endpoint for Vercel to GET the latest data
 app.get('/api/latest', (req, res) => {
   if (latestData) {
     res.json(latestData);
@@ -41,7 +41,7 @@ app.get('/api/latest', (req, res) => {
   }
 });
 
-// Root route
+// Root route (for simple sanity check)
 app.get('/', (req, res) => {
   res.send('Webhook forwarder is running.');
 });
