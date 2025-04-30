@@ -41,6 +41,11 @@ app.get('/api/latest', (req, res) => {
   }
 });
 
+// Root route
+app.get('/', (req, res) => {
+  res.send('Webhook forwarder is running.');
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Webhook forwarder running on port ${PORT}`);
