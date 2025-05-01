@@ -13,11 +13,14 @@ let latestData = null;
 
 // Webhook endpoint - receives data and forwards it to Vercel
 app.post('/api/webhook', async (req, res) => {
-  const data = req.body;
+  const data = {
+    ...req.body,
+    _receivedAt: Date.now(), // ✅ add timestamp when webhook is received
+  };
+
   latestData = data;
 
   try {
-    // Forward to Vercel API
     const response = await fetch(process.env.VERCEL_FORWARD_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
