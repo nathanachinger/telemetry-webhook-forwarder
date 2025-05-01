@@ -1,3 +1,6 @@
+// Nate Achinger
+// Solar Gators Telemetry Forwarder
+
 const express = require('express');
 const fetch = require('node-fetch');
 require('dotenv').config();
@@ -15,7 +18,7 @@ let latestData = null;
 app.post('/api/webhook', async (req, res) => {
   const data = {
     ...req.body,
-    _receivedAt: Date.now(), // ✅ add timestamp when webhook is received
+    _receivedAt: Date.now(), // add timestamp when webhook is received
   };
 
   latestData = data;
